@@ -28,7 +28,8 @@
           </router-link>
         </div>
 
-        <div class="sidebar-nav-item" v-if="authStore.hasPermission('school.view')">
+        <!-- <div class="sidebar-nav-item" v-if="authStore.hasPermission('school.view')"> -->
+        <div class="sidebar-nav-item">
           <router-link to="/dashboard/school/profile" class="sidebar-nav-link" :class="{ active: isActive('/dashboard/school') }" @click="closeSidebar">
             <i class="fas fa-school"></i>
             <span>โรงเรียนของฉัน</span>

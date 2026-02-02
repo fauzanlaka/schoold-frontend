@@ -104,13 +104,13 @@ const router = createRouter({
           path: 'school/register',
           name: 'school-register',
           component: () => import('../views/dashboard/SchoolRegisterView.vue'),
-          meta: { permission: 'school.view' }
+          // meta: { permission: 'school.view' }
         },
         {
           path: 'school/profile',
           name: 'school-profile',
           component: () => import('../views/dashboard/SchoolProfileView.vue'),
-          meta: { permission: 'school.view' }
+          // meta: { permission: 'school.view' }
         },
         // ============ User Management Routes ============
         {
