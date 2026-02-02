@@ -1,0 +1,730 @@
+/* ==========================================================================
+   Dashboard Template CSS
+   School Management System
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   CSS Variables - Theme Colors
+   -------------------------------------------------------------------------- */
+:root {
+    /* Primary Colors */
+    --db-primary: #4F46E5;
+    --db-primary-hover: #4338CA;
+    --db-primary-light: #EEF2FF;
+
+    /* Sidebar Colors */
+    --db-sidebar-bg: #1E293B;
+    --db-sidebar-text: #94A3B8;
+    --db-sidebar-text-hover: #FFFFFF;
+    --db-sidebar-active: #4F46E5;
+    --db-sidebar-width: 260px;
+    --db-sidebar-collapsed-width: 70px;
+
+    /* Topbar Colors */
+    --db-topbar-bg: #FFFFFF;
+    --db-topbar-height: 64px;
+    --db-topbar-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+    /* Status Colors */
+    --db-success: #10B981;
+    --db-success-light: #D1FAE5;
+    --db-warning: #F59E0B;
+    --db-warning-light: #FEF3C7;
+    --db-danger: #EF4444;
+    --db-danger-light: #FEE2E2;
+    --db-info: #3B82F6;
+    --db-info-light: #DBEAFE;
+
+    /* Background Colors */
+    --db-body-bg: #F1F5F9;
+    --db-card-bg: #FFFFFF;
+
+    /* Text Colors */
+    --db-text-primary: #1E293B;
+    --db-text-secondary: #64748B;
+    --db-text-muted: #94A3B8;
+
+    /* Border Colors */
+    --db-border-color: #E2E8F0;
+
+    /* Transitions */
+    --db-transition: all 0.3s ease;
+}
+
+/* --------------------------------------------------------------------------
+   Global Reset for Dashboard
+   -------------------------------------------------------------------------- */
+body.dashboard-body {
+    background-color: var(--db-body-bg);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--db-text-primary);
+    display: block;
+    place-items: unset;
+}
+
+body.dashboard-body #app {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+/* --------------------------------------------------------------------------
+   Dashboard Layout Structure
+   -------------------------------------------------------------------------- */
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --------------------------------------------------------------------------
+   Sidebar Styles
+   -------------------------------------------------------------------------- */
+.dashboard-sidebar {
+    width: var(--db-sidebar-width);
+    background: var(--db-sidebar-bg);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1040;
+    transition: var(--db-transition);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.dashboard-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dashboard-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+/* Sidebar Brand */
+.sidebar-brand {
+    height: var(--db-topbar-height);
+    display: flex;
+    align-items: center;
+    padding: 0 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-brand-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--db-primary);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.sidebar-brand-text {
+    margin-left: 12px;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+    padding: 1rem 0;
+}
+
+.sidebar-nav-title {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--db-sidebar-text);
+    padding: 0.75rem 1.25rem;
+    margin-top: 0.5rem;
+}
+
+.sidebar-nav-item {
+    margin: 2px 0.75rem;
+}
+
+.sidebar-nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: var(--db-sidebar-text);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: var(--db-transition);
+    font-size: 0.9rem;
+}
+
+.sidebar-nav-link:hover {
+    color: var(--db-sidebar-text-hover);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-nav-link.active {
+    color: #fff;
+    background: var(--db-sidebar-active);
+}
+
+.sidebar-nav-link i {
+    width: 20px;
+    margin-right: 12px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.sidebar-nav-link .nav-badge {
+    margin-left: auto;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   Main Content Area
+   -------------------------------------------------------------------------- */
+.dashboard-main {
+    flex: 1;
+    margin-left: var(--db-sidebar-width);
+    transition: var(--db-transition);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --------------------------------------------------------------------------
+   Topbar Styles
+   -------------------------------------------------------------------------- */
+.dashboard-topbar {
+    height: var(--db-topbar-height);
+    background: var(--db-topbar-bg);
+    box-shadow: var(--db-topbar-shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.topbar-toggle {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    color: var(--db-text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--db-transition);
+}
+
+.topbar-toggle:hover {
+    background: var(--db-primary-light);
+    color: var(--db-primary);
+}
+
+.topbar-search {
+    position: relative;
+    margin-left: 1rem;
+}
+
+.topbar-search input {
+    width: 300px;
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    border: 1px solid var(--db-border-color);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: var(--db-transition);
+}
+
+.topbar-search input:focus {
+    outline: none;
+    border-color: var(--db-primary);
+    box-shadow: 0 0 0 3px var(--db-primary-light);
+}
+
+.topbar-search i {
+    position: absolute;
+    left: 0.875rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--db-text-muted);
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.topbar-icon-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    color: var(--db-text-secondary);
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--db-transition);
+}
+
+.topbar-icon-btn:hover {
+    background: var(--db-primary-light);
+    color: var(--db-primary);
+}
+
+.topbar-icon-btn .badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 18px;
+    height: 18px;
+    font-size: 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--db-danger);
+    color: #fff;
+}
+
+/* User Dropdown */
+.topbar-user {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem;
+    padding-right: 0.75rem;
+    margin-left: 0.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: var(--db-transition);
+}
+
+.topbar-user:hover {
+    background: var(--db-primary-light);
+}
+
+.topbar-user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--db-primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.topbar-user-info {
+    margin-left: 0.75rem;
+}
+
+.topbar-user-name {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--db-text-primary);
+}
+
+.topbar-user-role {
+    font-size: 0.75rem;
+    color: var(--db-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   Content Area
+   -------------------------------------------------------------------------- */
+.dashboard-content {
+    flex: 1;
+    padding: 1.5rem;
+}
+
+/* Page Header */
+.page-header {
+    margin-bottom: 1.5rem;
+}
+
+.page-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--db-text-primary);
+    margin: 0;
+}
+
+.page-breadcrumb {
+    font-size: 0.875rem;
+    color: var(--db-text-muted);
+    margin-top: 0.25rem;
+}
+
+.page-breadcrumb a {
+    color: var(--db-primary);
+    text-decoration: none;
+}
+
+.page-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   Dashboard Cards
+   -------------------------------------------------------------------------- */
+.db-card {
+    background: var(--db-card-bg);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--db-border-color);
+    transition: var(--db-transition);
+}
+
+.db-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.db-card-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--db-border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.db-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--db-text-primary);
+}
+
+.db-card-body {
+    padding: 1.25rem;
+}
+
+.db-card-footer {
+    padding: 1rem 1.25rem;
+    border-top: 1px solid var(--db-border-color);
+    background: var(--db-body-bg);
+    border-radius: 0 0 12px 12px;
+}
+
+/* Stat Cards */
+.stat-card {
+    padding: 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.stat-icon.primary {
+    background: var(--db-primary-light);
+    color: var(--db-primary);
+}
+
+.stat-icon.success {
+    background: var(--db-success-light);
+    color: var(--db-success);
+}
+
+.stat-icon.warning {
+    background: var(--db-warning-light);
+    color: var(--db-warning);
+}
+
+.stat-icon.danger {
+    background: var(--db-danger-light);
+    color: var(--db-danger);
+}
+
+.stat-icon.info {
+    background: var(--db-info-light);
+    color: var(--db-info);
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--db-text-primary);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: var(--db-text-secondary);
+    margin-top: 0.25rem;
+}
+
+.stat-change {
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.stat-change.positive {
+    color: var(--db-success);
+}
+
+.stat-change.negative {
+    color: var(--db-danger);
+}
+
+/* --------------------------------------------------------------------------
+   Dashboard Tables
+   -------------------------------------------------------------------------- */
+.db-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.db-table th {
+    background: var(--db-body-bg);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--db-text-secondary);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--db-border-color);
+}
+
+.db-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--db-border-color);
+    font-size: 0.9rem;
+    color: var(--db-text-primary);
+}
+
+.db-table tbody tr:hover {
+    background: var(--db-primary-light);
+}
+
+.db-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* --------------------------------------------------------------------------
+   Dashboard Buttons
+   -------------------------------------------------------------------------- */
+.db-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: var(--db-transition);
+    text-decoration: none;
+}
+
+.db-btn-primary {
+    background: var(--db-primary);
+    color: #fff;
+}
+
+.db-btn-primary:hover {
+    background: var(--db-primary-hover);
+    color: #fff;
+}
+
+.db-btn-outline {
+    background: transparent;
+    border: 1px solid var(--db-border-color);
+    color: var(--db-text-secondary);
+}
+
+.db-btn-outline:hover {
+    border-color: var(--db-primary);
+    color: var(--db-primary);
+}
+
+.db-btn-sm {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8rem;
+}
+
+/* --------------------------------------------------------------------------
+   Dashboard Footer
+   -------------------------------------------------------------------------- */
+.dashboard-footer {
+    padding: 1rem 1.5rem;
+    background: var(--db-card-bg);
+    border-top: 1px solid var(--db-border-color);
+    font-size: 0.875rem;
+    color: var(--db-text-muted);
+    text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Design
+   -------------------------------------------------------------------------- */
+
+/* Tablet */
+@media (max-width: 992px) {
+    .topbar-search {
+        display: none;
+    }
+
+    .topbar-user-info {
+        display: none;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .dashboard-sidebar {
+        transform: translateX(-100%);
+    }
+
+    .dashboard-sidebar.show {
+        transform: translateX(0);
+    }
+
+    .dashboard-main {
+        margin-left: 0;
+    }
+
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1035;
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--db-transition);
+    }
+
+    .sidebar-overlay.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .dashboard-content {
+        padding: 1rem;
+    }
+
+    .stat-card {
+        padding: 1rem;
+    }
+
+    .stat-value {
+        font-size: 1.5rem;
+    }
+}
+
+/* Collapsed Sidebar (Desktop) */
+.dashboard-wrapper.sidebar-collapsed .dashboard-sidebar {
+    width: var(--db-sidebar-collapsed-width);
+}
+
+.dashboard-wrapper.sidebar-collapsed .sidebar-brand-text,
+.dashboard-wrapper.sidebar-collapsed .sidebar-nav-title,
+.dashboard-wrapper.sidebar-collapsed .sidebar-nav-link span,
+.dashboard-wrapper.sidebar-collapsed .nav-badge {
+    display: none;
+}
+
+.dashboard-wrapper.sidebar-collapsed .sidebar-nav-link {
+    justify-content: center;
+    padding: 0.75rem;
+}
+
+.dashboard-wrapper.sidebar-collapsed .sidebar-nav-link i {
+    margin-right: 0;
+    font-size: 1.25rem;
+}
+
+.dashboard-wrapper.sidebar-collapsed .dashboard-main {
+    margin-left: var(--db-sidebar-collapsed-width);
+}
+
+/* --------------------------------------------------------------------------
+   Utility Classes
+   -------------------------------------------------------------------------- */
+.text-primary {
+    color: var(--db-primary) !important;
+}
+
+.text-success {
+    color: var(--db-success) !important;
+}
+
+.text-warning {
+    color: var(--db-warning) !important;
+}
+
+.text-danger {
+    color: var(--db-danger) !important;
+}
+
+.text-info {
+    color: var(--db-info) !important;
+}
+
+.text-muted {
+    color: var(--db-text-muted) !important;
+}
+
+.bg-primary {
+    background-color: var(--db-primary) !important;
+}
+
+.bg-success {
+    background-color: var(--db-success) !important;
+}
+
+.bg-warning {
+    background-color: var(--db-warning) !important;
+}
+
+.bg-danger {
+    background-color: var(--db-danger) !important;
+}
+
+.bg-info {
+    background-color: var(--db-info) !important;
+}
