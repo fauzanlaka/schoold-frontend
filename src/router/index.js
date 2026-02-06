@@ -18,32 +18,33 @@ const router = createRouter({
         {
           path: '',
           name: 'storefront-home',
-          component: StorefrontHome
+          component: StorefrontHome,
+          meta: { title: 'หน้าแรก' }
         },
         // Auth Routes (Guest only)
         {
           path: 'register',
           name: 'register',
           component: () => import('../views/auth/RegisterView.vue'),
-          meta: { guest: true }
+          meta: { guest: true, title: 'ลงทะเบียน' }
         },
         {
           path: 'login',
           name: 'login',
           component: () => import('../views/auth/LoginView.vue'),
-          meta: { guest: true }
+          meta: { guest: true, title: 'เข้าสู่ระบบ' }
         },
         {
           path: 'forgot-password',
           name: 'forgot-password',
           component: () => import('../views/auth/ForgotPasswordView.vue'),
-          meta: { guest: true }
+          meta: { guest: true, title: 'ลืมรหัสผ่าน' }
         },
         {
           path: 'reset-password',
           name: 'reset-password',
           component: () => import('../views/auth/ResetPasswordView.vue'),
-          meta: { guest: true }
+          meta: { guest: true, title: 'ตั้งรหัสผ่านใหม่' }
         },
         {
           path: 'email/verify/:id/:hash',
@@ -63,6 +64,7 @@ const router = createRouter({
           path: '',
           name: 'dashboard-home',
           component: DashboardHome,
+          meta: { title: 'แดชบอร์ด' }
         },
         {
           path: 'students',
@@ -104,26 +106,26 @@ const router = createRouter({
           path: 'school/register',
           name: 'school-register',
           component: () => import('../views/dashboard/SchoolRegisterView.vue'),
-          // meta: { permission: 'school.view' }
+          meta: { title: 'ลงทะเบียนโรงเรียน' }
         },
         {
           path: 'school/profile',
           name: 'school-profile',
           component: () => import('../views/dashboard/SchoolProfileView.vue'),
-          // meta: { permission: 'school.view' }
+          meta: { title: 'ข้อมูลโรงเรียน' }
         },
         // ============ User Management Routes ============
         {
           path: 'users',
           name: 'user-management',
           component: () => import('../views/dashboard/UserManagement.vue'),
-          meta: { permission: 'users.view' }
+          meta: { permission: 'users.view', title: 'จัดการผู้ใช้งาน' }
         },
         {
           path: 'roles',
           name: 'role-management',
           component: () => import('../views/dashboard/RoleManagement.vue'),
-          meta: { permission: 'roles.view' }
+          meta: { permission: 'roles.view', title: 'จัดการสิทธิ์และบทบาท' }
         },
         {
           path: 'settings',
@@ -141,52 +143,52 @@ const router = createRouter({
           path: 'equipment/categories',
           name: 'asset-category-list',
           component: () => import('../views/dashboard/equipment/AssetCategoryListView.vue'),
-          meta: { permission: 'asset-categories.view' }
+          meta: { permission: 'asset-categories.view', title: 'ประเภทครุภัณฑ์' }
         },
         {
           path: 'equipment/categories/create',
           name: 'asset-category-create',
           component: () => import('../views/dashboard/equipment/AssetCategoryFormView.vue'),
-          meta: { permission: 'asset-categories.create' }
+          meta: { permission: 'asset-categories.create', title: 'เพิ่มประเภทครุภัณฑ์' }
         },
         {
           path: 'equipment/categories/:id/edit',
           name: 'asset-category-edit',
           component: () => import('../views/dashboard/equipment/AssetCategoryFormView.vue'),
-          meta: { permission: 'asset-categories.edit' }
+          meta: { permission: 'asset-categories.edit', title: 'แก้ไขประเภทครุภัณฑ์' }
         },
         // Assets
         {
           path: 'equipment/registry',
           name: 'asset-list',
           component: () => import('../views/dashboard/equipment/AssetListView.vue'),
-          meta: { permission: 'assets.view' }
+          meta: { permission: 'assets.view', title: 'ทะเบียนครุภัณฑ์' }
         },
         {
           path: 'equipment/registry/create',
           name: 'asset-create',
           component: () => import('../views/dashboard/equipment/AssetFormView.vue'),
-          meta: { permission: 'assets.create' }
+          meta: { permission: 'assets.create', title: 'เพิ่มครุภัณฑ์' }
         },
         {
           path: 'equipment/registry/:id',
           name: 'asset-detail',
           component: () => import('../views/dashboard/equipment/AssetDetailView.vue'),
-          meta: { permission: 'assets.view' }
+          meta: { permission: 'assets.view', title: 'รายละเอียดครุภัณฑ์' }
         },
         {
           path: 'equipment/registry/:id/edit',
           name: 'asset-edit',
           component: () => import('../views/dashboard/equipment/AssetFormView.vue'),
-          meta: { permission: 'assets.edit' }
+          meta: { permission: 'assets.edit', title: 'แก้ไขครุภัณฑ์' }
         },
         // Asset Reports
         {
           path: 'equipment/reports',
           name: 'asset-reports',
           component: () => import('../views/dashboard/equipment/AssetReportsView.vue'),
-          meta: { permission: 'assets.report' }
-        }
+          meta: { permission: 'assets.report', title: 'รายงานครุภัณฑ์' }
+        },
       ]
     }
   ]
@@ -207,6 +209,11 @@ router.beforeEach(async (to, from, next) => {
   // Import store
   const { useAuthStore } = await import('@/stores/auth')
   const store = useAuthStore()
+
+  // Update document title
+  const defaultTitle = 'ระบบบริหารจัดการโรงเรียน'
+  const title = to.meta.title ? `${to.meta.title} - ${defaultTitle}` : defaultTitle
+  document.title = title
 
   // Check if route requires authentication
   if (to.matched.some(record => record.meta.requiresAuth)) {

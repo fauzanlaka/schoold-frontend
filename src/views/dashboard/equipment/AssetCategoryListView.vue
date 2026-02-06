@@ -10,7 +10,7 @@
           </h1>
           <p class="text-muted mb-0">จัดการประเภทครุภัณฑ์ของโรงเรียน</p>
         </div>
-        <div class="col-auto d-flex gap-2">
+        <div class="col-auto d-flex gap-2" v-if="authStore.hasPermission('asset-categories.edit')">
           <button type="button" class="btn btn-outline-secondary" @click="downloadTemplate">
             <i class="fas fa-download me-2"></i>
             ดาวน์โหลด Template
@@ -108,7 +108,7 @@
                 </td>
                 <td class="text-center">
                   <div class="btn-group btn-group-sm">
-                    <router-link 
+                    <router-link  v-if="authStore.hasPermission('asset-categories.edit')"
                       :to="`/dashboard/equipment/categories/${cat.id}/edit`"
                       class="btn btn-outline-primary"
                       title="แก้ไข"
@@ -116,6 +116,7 @@
                       <i class="fas fa-edit"></i>
                     </router-link>
                     <button 
+                      v-if="authStore.hasPermission('asset-categories.delete')"
                       type="button" 
                       class="btn btn-outline-danger"
                       title="ลบ"
@@ -249,7 +250,9 @@
 import { ref, reactive, computed, onMounted } from 'vue';
 import api from '@/services/api';
 import Swal from 'sweetalert2';
+import { useAuthStore } from '@/stores/auth';
 
+const authStore = useAuthStore();
 const loading = ref(false);
 const categories = ref([]);
 const search = ref('');

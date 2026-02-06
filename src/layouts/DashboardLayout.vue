@@ -36,7 +36,7 @@
           </router-link>
         </div>
 
-        <div class="sidebar-nav-title">พัสดุและครุภัณฑ์</div>
+        <div class="sidebar-nav-title" v-if="authStore.hasPermission('asset.view') || authStore.hasPermission('assets.view')">พัสดุและครุภัณฑ์</div>
 
         <div class="sidebar-nav-item" v-if="authStore.hasPermission('asset-categories.view')">
           <router-link to="/dashboard/equipment/categories" class="sidebar-nav-link" :class="{ active: isActive('/dashboard/equipment/categories') }" @click="closeSidebar">
@@ -59,7 +59,7 @@
           </router-link>
         </div>
 
-        <div class="sidebar-nav-title">การจัดการผู้ใช้</div>
+        <div class="sidebar-nav-title" v-if="authStore.hasPermission('users.view')">การจัดการผู้ใช้</div>
 
         <div class="sidebar-nav-item" v-if="authStore.hasPermission('users.view')">
           <router-link to="/dashboard/users" class="sidebar-nav-link" :class="{ active: isActive('/dashboard/users') }" @click="closeSidebar">
@@ -156,24 +156,24 @@
           </button>
 
           <!-- Search -->
-          <div class="topbar-search">
+          <!-- <div class="topbar-search">
             <i class="fas fa-search"></i>
             <input type="text" placeholder="ค้นหา..." />
-          </div>
+          </div> -->
         </div>
 
         <div class="topbar-right">
           <!-- Notifications -->
-          <button class="topbar-icon-btn">
+          <!-- <button class="topbar-icon-btn">
             <i class="fas fa-bell"></i>
             <span class="badge">3</span>
-          </button>
+          </button> -->
 
           <!-- Messages -->
-          <button class="topbar-icon-btn">
+          <!-- <button class="topbar-icon-btn">
             <i class="fas fa-envelope"></i>
             <span class="badge">5</span>
-          </button>
+          </button> -->
 
           <!-- User Dropdown -->
           <div class="topbar-user dropdown">

@@ -253,12 +253,14 @@
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useSchoolStore } from '@/stores/school'
+import { useAuthStore } from '@/stores/auth'
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css'
 import Swal from 'sweetalert2'
 
 const router = useRouter()
 const schoolStore = useSchoolStore()
+const authStore = useAuthStore()
 
 // Selected objects for v-select
 const selectedProvince = ref(null)
@@ -373,6 +375,9 @@ async function handleSubmit() {
         icon: 'success',
         confirmButtonColor: '#14b8a6'
       })
+      
+      // Refresh user data to get new roles and permissions
+      await authStore.fetchUser()
       
       router.push('/dashboard/school/profile')
     }

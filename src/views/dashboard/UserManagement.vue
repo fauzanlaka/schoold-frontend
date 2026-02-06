@@ -110,14 +110,14 @@
                     >
                       <i class="fas fa-edit"></i>
                     </button>
-                    <button 
+                    <!-- <button 
                       v-if="authStore.hasPermission('users.delete')"
                       class="btn btn-outline-danger"
                       title="ลบ"
                       @click="deleteUser(user)"
                     >
                       <i class="fas fa-trash"></i>
-                    </button>
+                    </button> -->
                   </div>
                 </td>
               </tr>
