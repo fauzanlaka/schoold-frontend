@@ -77,13 +77,13 @@ body.storefront-body {
 }
 
 .storefront-btn-primary {
-    background-color: var(--sf-primary);
-    color: var(--sf-white);
+    background-color: var(--sf-primary) !important;
+    color: var(--sf-white) !important;
 }
 
 .storefront-btn-secondary {
-    background-color: var(--sf-secondary);
-    color: var(--sf-white);
+    background-color: var(--sf-secondary) !important;
+    color: var(--sf-white) !important;
 }
 
 .storefront-btn:hover {

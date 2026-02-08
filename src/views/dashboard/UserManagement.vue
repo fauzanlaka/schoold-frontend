@@ -238,6 +238,7 @@
                     class="form-select"
                     :class="{ 'is-invalid': errors.role }"
                     v-model="form.role"
+                    :disabled="isEditingSelf"
                     required
                   >
                     <option value="">เลือก Role</option>
@@ -246,6 +247,10 @@
                     </option>
                   </select>
                   <div class="invalid-feedback">{{ errors.role }}</div>
+                  <small v-if="isEditingSelf" class="text-warning">
+                    <i class="fas fa-exclamation-triangle me-1"></i>
+                    ไม่สามารถแก้ไข Role ของตัวเองได้
+                  </small>
                 </div>
                 <div class="col-md-6" v-if="isEditing">
                   <label class="form-label">สถานะ</label>
@@ -293,6 +298,7 @@ const search = ref('');
 const showModal = ref(false);
 const isEditing = ref(false);
 const editingUserId = ref(null);
+const isEditingSelf = computed(() => isEditing.value && editingUserId.value === authStore.user?.id);
 
 const filters = reactive({
   role: ''

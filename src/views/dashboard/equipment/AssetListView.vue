@@ -10,7 +10,7 @@
           </h1>
           <p class="text-muted mb-0">บริหารจัดการครุภัณฑ์ทั้งหมดของโรงเรียน</p>
         </div>
-        <div class="col-auto">
+        <div class="col-auto" v-if="authStore.hasPermission('assets.create')">
           <div class="btn-group">
             <button type="button" class="btn btn-outline-success" @click="downloadTemplate">
               <i class="fas fa-download me-2"></i>
@@ -325,7 +325,9 @@
 import { ref, reactive, computed, onMounted } from 'vue';
 import api from '@/services/api';
 import Swal from 'sweetalert2';
+import { useAuthStore } from '@/stores/auth';
 
+const authStore = useAuthStore();
 const loading = ref(false);
 const assets = ref([]);
 const categories = ref([]);

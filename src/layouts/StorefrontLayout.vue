@@ -21,8 +21,8 @@
               <a href="#modules" class="nav-link storefront-nav-link">บริการ</a>
             </li>
             <li class="nav-item ms-lg-3">
-              <router-link to="/login" class="btn storefront-btn storefront-btn-secondary text-white">
-                <i class="fas fa-sign-in-alt me-2"></i>เข้าสู่ระบบ
+              <router-link to="/login" class="nav-link storefront-nav-link">
+                เข้าสู่ระบบ
               </router-link>
             </li>
             <li class="nav-item ms-2">

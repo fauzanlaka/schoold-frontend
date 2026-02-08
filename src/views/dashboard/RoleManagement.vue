@@ -68,14 +68,15 @@
                 v-for="perm in role.permissions.slice(0, 8)" 
                 :key="perm"
                 class="badge bg-light text-dark me-1 mb-1"
+                :title="perm"
               >
-                {{ perm }}
+                {{ getPermissionLabel(perm) }}
               </span>
               <span 
                 v-if="role.permissions.length > 8"
                 class="badge bg-secondary"
               >
-                +{{ role.permissions.length - 8 }} more
+                +{{ role.permissions.length - 8 }} อื่นๆ
               </span>
             </div>
           </div>
@@ -130,7 +131,7 @@
                           @change="toggleGroup(group, perms)"
                         />
                         <label class="form-check-label fw-bold" :for="`group-${group}`">
-                          {{ group }}
+                          {{ getGroupLabel(group) }}
                         </label>
                       </div>
                     </div>
@@ -146,9 +147,8 @@
                               v-model="form.permissions"
                             />
                             <label class="form-check-label small" :for="`perm-${perm.id}`">
-                              <span v-if="perm.description">{{ perm.description }}</span>
-                              <span v-else>{{ perm.name.split('.')[1] }}</span>
-                              <span v-if="perm.description" class="text-muted ms-1" style="font-size: 0.75em;">({{ perm.name }})</span>
+                              {{ getPermissionLabel(perm.name) }}
+                              <span class="text-muted ms-1" style="font-size: 0.75em;">({{ perm.name }})</span>
                             </label>
                           </div>
                         </div>
@@ -214,6 +214,94 @@ const getRoleBadgeClass = (roleName) => {
     'staff': 'bg-secondary'
   };
   return classes[roleName] || 'bg-dark';
+};
+
+// Thai labels for permission groups
+const groupLabels = {
+  'users': 'ผู้ใช้งาน',
+  'roles': 'บทบาท',
+  'permissions': 'สิทธิ์การใช้งาน',
+  'schools': 'โรงเรียน',
+  'students': 'นักเรียน',
+  'teachers': 'ครู',
+  'classes': 'ห้องเรียน',
+  'subjects': 'วิชา',
+  'grades': 'เกรด',
+  'reports': 'รายงาน',
+  'settings': 'ตั้งค่า',
+  'dashboard': 'แดชบอร์ด',
+  'assets': 'ทรัพย์สิน',
+  'asset-categories': 'หมวดหมู่ทรัพย์สิน',
+};
+
+// Thai labels for permissions
+const permissionLabels = {
+  // Users
+  'users.view': 'ดูผู้ใช้งาน',
+  'users.create': 'เพิ่มผู้ใช้งาน',
+  'users.edit': 'แก้ไขผู้ใช้งาน',
+  'users.delete': 'ลบผู้ใช้งาน',
+  // Roles
+  'roles.view': 'ดูบทบาท',
+  'roles.create': 'เพิ่มบทบาท',
+  'roles.edit': 'แก้ไขบทบาท',
+  'roles.delete': 'ลบบทบาท',
+  // Schools
+  'schools.view': 'ดูโรงเรียน',
+  'schools.create': 'เพิ่มโรงเรียน',
+  'schools.edit': 'แก้ไขโรงเรียน',
+  'schools.delete': 'ลบโรงเรียน',
+  // Students
+  'students.view': 'ดูนักเรียน',
+  'students.create': 'เพิ่มนักเรียน',
+  'students.edit': 'แก้ไขนักเรียน',
+  'students.delete': 'ลบนักเรียน',
+  // Teachers
+  'teachers.view': 'ดูครู',
+  'teachers.create': 'เพิ่มครู',
+  'teachers.edit': 'แก้ไขครู',
+  'teachers.delete': 'ลบครู',
+  // Classes
+  'classes.view': 'ดูห้องเรียน',
+  'classes.create': 'เพิ่มห้องเรียน',
+  'classes.edit': 'แก้ไขห้องเรียน',
+  'classes.delete': 'ลบห้องเรียน',
+  // Subjects
+  'subjects.view': 'ดูวิชา',
+  'subjects.create': 'เพิ่มวิชา',
+  'subjects.edit': 'แก้ไขวิชา',
+  'subjects.delete': 'ลบวิชา',
+  // Grades
+  'grades.view': 'ดูเกรด',
+  'grades.create': 'เพิ่มเกรด',
+  'grades.edit': 'แก้ไขเกรด',
+  'grades.delete': 'ลบเกรด',
+  // Reports
+  'reports.view': 'ดูรายงาน',
+  'reports.export': 'ส่งออกรายงาน',
+  // Settings
+  'settings.view': 'ดูตั้งค่า',
+  'settings.edit': 'แก้ไขตั้งค่า',
+  // Dashboard
+  'dashboard.view': 'ดูแดชบอร์ด',
+  // Assets
+  'assets.view': 'ดูทรัพย์สิน',
+  'assets.create': 'เพิ่มทรัพย์สิน',
+  'assets.edit': 'แก้ไขทรัพย์สิน',
+  'assets.delete': 'ลบทรัพย์สิน',
+  // Asset Categories
+  'asset-categories.view': 'ดูหมวดหมู่ทรัพย์สิน',
+  'asset-categories.create': 'เพิ่มหมวดหมู่ทรัพย์สิน',
+  'asset-categories.edit': 'แก้ไขหมวดหมู่ทรัพย์สิน',
+  'asset-categories.delete': 'ลบหมวดหมู่ทรัพย์สิน',
+};
+
+const getGroupLabel = (group) => {
+  return groupLabels[group] || group;
+};
+
+const getPermissionLabel = (permName) => {
+  return permissionLabels[permName] || permName;
 };
 
 const isProtectedRole = (roleName) => {
