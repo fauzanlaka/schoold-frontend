@@ -69,6 +69,12 @@
                 </div>
                 <div class="col-md-6">
                   <div class="info-item">
+                    <label class="text-muted small">ชื่อส่วนราชการ</label>
+                    <p class="mb-0">{{ schoolStore.school.government_agency_name || '-' }}</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="info-item">
                     <label class="text-muted small">อีเมล</label>
                     <p class="mb-0">{{ schoolStore.school.email || '-' }}</p>
                   </div>
@@ -170,6 +176,20 @@
                     >
                   </div>
                   <div v-if="errors.school_code" class="text-danger small mt-1">{{ errors.school_code[0] }}</div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="government_agency_name" class="form-label fw-medium">ชื่อส่วนราชการ</label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-light"><i class="fas fa-landmark text-muted"></i></span>
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      id="government_agency_name" 
+                      v-model="form.government_agency_name"
+                      placeholder="ระบุชื่อส่วนราชการ"
+                    >
+                  </div>
                 </div>
               </div>
 
@@ -378,6 +398,7 @@ const form = reactive({
   postal_code: '',
   phone: '',
   email: '',
+  government_agency_name: '',
   grade_levels: []
 })
 
@@ -437,6 +458,7 @@ async function startEditing() {
   form.postal_code = school.postal_code || ''
   form.phone = school.phone || ''
   form.email = school.email || ''
+  form.government_agency_name = school.government_agency_name || ''
   form.grade_levels = school.grade_levels?.map(gl => gl.id) || []
   
   // Load amphures and subdistricts based on current selection

@@ -55,7 +55,7 @@
               </div>
               <div class="flex-grow-1 ms-3">
                 <div class="small">ใช้งานอยู่</div>
-                <div class="h4 mb-0">{{ summary.status_counts?.[1] || 0 }}</div>
+                <div class="h4 mb-0">{{ getStatusCount(1) }}</div>
               </div>
             </div>
           </div>
@@ -70,7 +70,7 @@
               </div>
               <div class="flex-grow-1 ms-3">
                 <div class="small">กำลังซ่อมแซม</div>
-                <div class="h4 mb-0">{{ summary.status_counts?.[4] || 0 }}</div>
+                <div class="h4 mb-0">{{ getStatusCount(4) }}</div>
               </div>
             </div>
           </div>
@@ -393,6 +393,12 @@ const getStatusBadgeClass = (status) => {
     5: 'bg-danger'
   };
   return classes[status] || 'bg-light text-dark';
+};
+
+const getStatusCount = (statusId) => {
+  if (!summary.value?.status_counts) return 0;
+  const found = summary.value.status_counts.find(item => item.status === statusId);
+  return found?.count || 0;
 };
 
 const loadCategories = async () => {

@@ -345,7 +345,7 @@ const loadAsset = async () => {
       // Find matching category from categories list using category_code
       if (asset.category) {
         const matchedCategory = categories.value.find(
-          c => c.category_code === asset.category.category_code
+          c => c.id === asset.category.category_id
         );
         if (matchedCategory) {
           form.category_id = matchedCategory.id;
